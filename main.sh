@@ -5,6 +5,9 @@ porta="53"
 
 echo "Endereco IP e porta do servico de nome: $endereco_ip:$porta"
 
+tcpdump -i any -w "captura_jose_dhonatas.pcap" "$endereco_ip" and port "$porta" -c 20
+echo "Captura de trafego salva"
+
 if ping -c 1 "$endereco_ip" &> /dev/null; then
     echo "O host do servico de nome está online"
 else

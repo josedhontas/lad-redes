@@ -12,8 +12,7 @@ else
 fi
 
 
-
-if timeout 1 telnet "$endereco_ip" "$porta" &> /dev/null; then
+if timeout 1 telnet "$endereco_ip" "$porta" | grep -q "Connected"; then
     echo "O serviço web está respondendo corretamente"
 else
     echo "O serviço web não está respondendo corretamente"

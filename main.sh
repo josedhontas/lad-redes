@@ -13,10 +13,10 @@ fi
 
 
 
-if telnet "$endereco_ip" "$porta" &> /dev/null; then
-    echo "O serviço web esta respondendo corretamente"
+if timeout 1 telnet "$endereco_ip" "$porta" &> /dev/null; then
+    echo "O serviço web está respondendo corretamente"
 else
-    echo "O serviço web nao esta respondendo corretamente"
+    echo "O serviço web não está respondendo corretamente"
 fi
 
 #chmod +x nome_do_script.sh, ./nome_do_script.sh

@@ -4,7 +4,7 @@ def test_server():
     print("Passos para testar o servidor web:")
     print("1. Certifique-se de que o servidor esta em execucao.")
     print("2. Abra um navegador da web e acesse: http://localhost:8080/")
-    print("3. Verifique se a pagina da Empresa Exemplo eh exibida corretamente.")
+    print("3. Verifique se a pagina da Empresa Exemplo e exibida corretamente.")
     print("\nTeste automatizado:")
     try:
         conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -17,7 +17,7 @@ def test_server():
                 break
             response += part
         data = response.decode()
-        print(f"Status da resposta: {data.splitlines()[0]}")
+        print("Status da resposta: {0}".format(data.splitlines()[0]))
         print("Conteudo da pagina:")
         print(data)
     except ConnectionRefusedError:

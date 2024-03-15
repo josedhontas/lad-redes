@@ -1,33 +1,28 @@
-from http.server import HTTPServer, BaseHTTPRequestHandler
+import socket
 
-# HTML da página da Empresa Exemplo
-HTML_PAGE = """
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Empresa Exemplo</title>
-</head>
-<body>
-    <h1>Bem-vindo à Empresa Exemplo</h1>
-    <p>Descrição da empresa...</p>
-</body>
-</html>
-"""
+def start_server():
+    host = 'localhost'
+    port = 8080
 
-class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header('Content-type', 'text/html')
-        self.end_headers()
-        self.wfile.write(HTML_PAGE.encode())
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-def run(server_class=HTTPServer, handler_class=SimpleHTTPRequestHandler, port=8080):
-    server_address = ('', port)
-    httpd = server_class(server_address, handler_class)
-    print(f"Servidor rodando em http://localhost:{port}")
-    httpd.serve_forever()
+    server_socket.bind((host, port))
 
-if __name__ == '__main__':
-    run()
+    server_socket.listen(1)
+    print("Servidor esta ouvindo em {}:{}".format(host, port))
+
+    while True:
+        client_socket, client_address = server_socket.accept()
+        print("Conexao estabelecida com {}".format(client_address))
+
+        request = client_socket.recv(4096)
+        print("Solicitacao do cliente:")
+        print(request)
+
+        response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html><body><h1>Servidor Python</h1><p>Esta e uma resposta do servidor de exemplo.</p></body></html>"
+        client_socket.sendall(response)
+
+        client_socket.close()
+
+if __name__ == "__main__":
+    start_server()

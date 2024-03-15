@@ -2,9 +2,9 @@ import socket
 
 def test_server():
     print("Passos para testar o servidor web:")
-    print("1. Certifique-se de que o servidor está em execução.")
+    print("1. Certifique-se de que o servidor esta em execucao.")
     print("2. Abra um navegador da web e acesse: http://localhost:8080/")
-    print("3. Verifique se a página da Empresa Exemplo é exibida corretamente.")
+    print("3. Verifique se a pagina da Empresa Exemplo eh exibida corretamente.")
     print("\nTeste automatizado:")
     try:
         conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
